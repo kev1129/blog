@@ -1,11 +1,11 @@
 <template>
   <div>
-    <nav>
-        <ul>
-            <li><nuxt-link to="posts">posts</nuxt-link></li>
-            <li><nuxt-link to="profile">profile</nuxt-link></li>
-        </ul>
-    </nav>
+      <nav>
+          <ul>
+              <li><nuxt-link to="posts">posts</nuxt-link></li>
+              <li><nuxt-link to="profile">profile</nuxt-link></li>
+          </ul>
+      </nav>
     <!-- render data of the person -->
     <!-- render blog posts -->
     <ul>
@@ -54,7 +54,6 @@
         // return data that should be available
         // in the template
         return {
-          person: entries.items[0],
           posts: posts.items
         }
       }).catch(console.error)

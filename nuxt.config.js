@@ -29,7 +29,10 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-
+  router: {
+    // base: '/blog/',
+    // routeNameSplitter: '/'
+  },
   /*
   ** Global CSS
   */

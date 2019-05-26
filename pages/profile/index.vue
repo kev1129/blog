@@ -1,34 +1,14 @@
 <template>
   <div>
-    <nav>
-        <ul>
-            <li><nuxt-link to="posts">posts</nuxt-link></li>
-            <li><nuxt-link to="profile">profile</nuxt-link></li>
-        </ul>
-    </nav>
+      <nav>
+          <ul>
+              <li><nuxt-link to="posts">posts</nuxt-link></li>
+              <li><nuxt-link to="profile">profile</nuxt-link></li>
+          </ul>
+      </nav>
     <!-- render data of the person -->
     <!-- render blog posts -->
-    <ul>
-      <li v-for="post in posts" :key="post">
-        title:{{ post.fields.title }}
-        <br>
-        slug:{{ post.fields.slug }}
-        <br>
-        <br>
-        tags:{{ post.fields.tags }}
-        <br>
-        <!-- <img v-bind:src="post.fields.image"/> -->
-        desc:{{ post.fields.description }}
-        <br>
-        author:{{post.fields.author}}
-        date:{{ ( new Date(post.fields.publishDate)).toDateString() }}
-        <br>
-        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.fields.slug }}">
-          Read Full Content
-        </nuxt-link>
-        <hr>
-      </li>
-    </ul>
+        profile:{{ person.fields.name }}
   </div>
 </template>
 
