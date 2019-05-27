@@ -49,7 +49,12 @@
         client.getEntries({
           'content_type': env.CTF_BLOG_POST_TYPE_ID,
           order: '-sys.createdAt'
-        })
+        }),
+        client.sync({initial: true})
+        .then((response) => {
+          console.log(response.entries)
+          console.log(response.assets)
+        }),
       ]).then(([entries, posts]) => {
         // return data that should be available
         // in the template

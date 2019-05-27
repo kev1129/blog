@@ -2,8 +2,11 @@
   <div>
     <!-- render data of the person -->
     <!-- render blog posts -->
-    title:{{ currentPost.fields.title }}
-    body:{{ currentPost.fields.body }}
+    title:{{ post.fields.title }}
+    <br>
+    desc:{{ post.fields.description }}
+    <br>
+    body:{{ post.fields.body }}
   </div>
 </template>
 
@@ -15,11 +18,12 @@
   export default {
     data () {
       return {
+        allPosts: [],
         currentPost: []
       }
     },
     // `env` is available in the context object
-    asyncData ({env}) {
+    asyncData ({env, params}) {
       return Promise.all([
         // fetch the owner of the blog
         client.getEntries({
@@ -28,14 +32,14 @@
         // fetch all blog posts sorted by creation date
         client.getEntries({
           'content_type': env.CTF_BLOG_POST_TYPE_ID,
-          order: '-sys.createdAt'
+          'fields.slug': params.slug,
+          order: '-sys.createdAt',
         })
       ]).then(([entries, posts]) => {
         // return data that should be available
         // in the template
         return {
-          posts: posts.items,
-          currentPost: current[0]
+            post: posts.items[0],
         }
       }).catch(console.error)
     }
