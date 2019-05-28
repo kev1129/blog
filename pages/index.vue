@@ -4,6 +4,7 @@
         <ul>
             <li><nuxt-link to="posts">posts</nuxt-link></li>
             <li><nuxt-link to="profile">profile</nuxt-link></li>
+            <li><nuxt-link :to="{ name: 'posts-slug', params: 'id'}">tag: id</nuxt-link></li>
         </ul>
     </nav>
     <!-- render data of the person -->
@@ -14,13 +15,11 @@
         <br>
         slug:{{ post.fields.slug }}
         <br>
-        <br>
         tags:{{ post.fields.tags }}
         <br>
         <!-- <img v-bind:src="post.fields.image"/> -->
         desc:{{ post.fields.description }}
         <br>
-        author:{{post.fields.author}}
         date:{{ ( new Date(post.fields.publishDate)).toDateString() }}
         <br>
         <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.fields.slug }}">
@@ -34,9 +33,7 @@
 
 <script>
   import {createClient} from '~/plugins/contentful.js'
-
   const client = createClient()
-
   export default {
     // `env` is available in the context object
     asyncData ({env}) {
