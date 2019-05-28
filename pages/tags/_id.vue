@@ -1,24 +1,8 @@
 <template>
   <div>
-    <nav>
-        <ul>
-            <li><nuxt-link to="posts">posts</nuxt-link></li>
-            <li><nuxt-link to="profile">profile</nuxt-link></li>
-            <li><nuxt-link :to="{ name: 'tags-id', params: testTags }">tag: hi</nuxt-link></li>
-        </ul>
-        <!-- <ul v-for="tag in allTags" :key="tag">
-            <li><nuxt-link :to="{ name: 'tags-id', params: tag }">{{ tag }}</nuxt-link></li>
-        </ul> -->
-        <a href="tags/hi">hihi</a>
-    </nav>
     <!-- render data of the person -->
     <!-- render blog posts -->
-    <ul v-for="post in posts" :key="post">
-      <li>
-        tags:{{ post.fields.tags }}
-      </li>
-    </ul>
-    <hr>
+    <h1>tags</h1>
     <ul>
       <li v-for="post in posts" :key="post">
         title:{{ post.fields.title }}
@@ -43,15 +27,12 @@
 
 <script>
   import {createClient} from '~/plugins/contentful.js'
+
   const client = createClient()
+
   export default {
-    data () {
-      return {
-        testTags: 'javascript'
-      }
-    },
     // `env` is available in the context object
-    asyncData ({env}) {
+    asyncData ({env, params}) {
       return Promise.all([
         // fetch the owner of the blog
         client.getEntries({
@@ -60,15 +41,14 @@
         // fetch all blog posts sorted by creation date
         client.getEntries({
           'content_type': env.CTF_BLOG_POST_TYPE_ID,
-          order: '-sys.createdAt'
-        }),
+          'fields.tags': params.tags,
+          order: '-sys.createdAt',
+        })
       ]).then(([entries, posts]) => {
         // return data that should be available
         // in the template
         return {
-          person: entries.items[0],
-          posts: posts.items,
-
+            post: posts.items[0],
         }
       }).catch(console.error)
     }
