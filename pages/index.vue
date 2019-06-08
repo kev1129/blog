@@ -1,103 +1,51 @@
 <template>
-  <div>
-      <li v-for="post in blogTabs" :key="post">
-        title:{{ post.fields.blogTag }}
-        <nuxt-link :to="{ name: 'tags-id', params: { id: post.sys.id }}">
-          link
-        </nuxt-link>
-
-      </li>
-
-    <nav>
-        <ul>
-            <li><nuxt-link to="posts">posts</nuxt-link></li>
-            <li><nuxt-link to="profile">profile</nuxt-link></li>
-            <!-- <li><nuxt-link :to="{ name: 'tags-id', params: { tag: post.fields.blogTags } }">tag: hi</nuxt-link></li> -->
-        </ul>
-    </nav>
-      <li v-for="post in blogTabs" :key="post">
-        title:{{ post.fields.blogTag }}
-        <a href="tags/book">hi</a>
-        <nuxt-link :to="{ name: 'tags-slug', params: { slug: post.fields.blogTag }}">
-          Read Full Content
-        </nuxt-link>
-
-        <hr>
-      </li>
-      <div>
-        <h2>genre</h2>
-        <nuxt-link :to="{ name: 'tags-id', params: { id: 'hello' }}">
-          hello
-        </nuxt-link>
-        <nuxt-link :to="{ name: 'tags-id', params: { id: 'photo' }}">
-          photo
-        </nuxt-link>
-        <nuxt-link :to="{ name: 'tags-id', params: { id: 'book' }}">
-          book
-        </nuxt-link>
-        <nuxt-link :to="{ name: 'tags-id', params: { id: 'agri' }}">
-          agri
-        </nuxt-link>
-
-      </div>
-    <!-- render data of the person -->
-    <!-- render blog posts -->
-    <ul>
-      <li v-for="post in posts" :key="post">
-        title:{{ post.fields.title }}
-        <br>
-        slug:{{ post.fields.slug }}
-        <br>
-        tags:{{ post.fields.blogTags }}
-        <br>
-        <!-- <img v-bind:src="post.fields.image"/> -->
-        desc:{{ post.fields.description }}
-        <br>
-        date:{{ ( new Date(post.fields.publishDate)).toDateString() }}
-        <br>
-        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.fields.slug }}">
-          Read Full Content
-        </nuxt-link>
-        <hr>
-      </li>
-    </ul>
-  </div>
+    <div>
+        <base-title :title="story"></base-title>
+        <v-container grid-list-xl>
+            <v-layout  align-start justify-start row wrap>
+                <v-flex v-for="(story, index) in storys" :key="index" xs12 sm12 md6 lg6 xl6>
+                    <base-card :link="story.link" :image="story.image" :text="story.text"></base-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+        <!--  -->
+        <base-title :title="portfolio"></base-title>
+        <v-container grid-list-md>
+            <v-layout align-start justify-start row wrap>
+                <v-flex v-for="(card, index) in cards" :key="index" md4 lg4>
+                    <base-portcard :link="card.link" :image="card.image" :text="card.text"></base-portcard>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </div>
 </template>
 
 <script>
-  import {createClient} from '~/plugins/contentful.js'
-  const client = createClient()
-  export default {
-    // `env` is available in the context object
-    asyncData ({env}) {
-      return Promise.all([
-        // fetch the owner of the blog
-        // client.getContentTypes(),
-        client.getEntries({
-          'sys.id': env.CTF_PERSON_ID
-        }),
-        // fetch all blog posts sorted by creation date
-        client.getEntries({
-          'content_type': env.CTF_BLOG_POST_TYPE_ID,
-          order: '-sys.createdAt'
-        }),
-        client.getEntries({
-          content_type: 'blogTabs',
-          order: '-sys.createdAt'
-
-        })
-      ]).then(([entries, posts, blogTabs]) => {
-        // return data that should be available
-        // in the template
-          console.log(entries.items)
-          console.log(posts.items)
-          console.log(blogTabs.items)
+import BaseTitle from '~/components/BaseTitle.vue'
+import BasePortcard from '~/components/BasePortcard.vue'
+import BaseCard from '~/components/BaseCard.vue'
+export default {
+    components: {
+        BaseTitle,
+        BaseCard,
+        BasePortcard
+    },
+    data () {
         return {
-          person: entries.items,
-          posts: posts.items,
-          blogTabs: blogTabs.items
+            portfolio: 'Portfolio',
+            story: 'Story',
+            storys: [
+                {'text': 'Permaculture', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
+                {'text': 'Machine Learning', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
+                {'text': 'Python', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
+                {'text': 'Science', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
+            ],
+            cards: [
+                {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku.jpg'},
+                {'text': 'Web Portfolio', 'link': 'https://shinadokebukawa.com/portfolio/', 'image': 'img/portfolio.jpg'},
+                {'text': 'WordPress Blog', 'link': 'https://shinadokebukawa.com/taiwan/', 'image': 'img/taiwan.jpg'},
+            ]
         }
-      }).catch(console.error)
-    }
-  }
+    },
+}
 </script>

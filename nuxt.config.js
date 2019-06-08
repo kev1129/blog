@@ -17,12 +17,8 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-      }
-    ]
+      { href: 'https://use.fontawesome.com/releases/v5.9.0/css/all.css', integrity: 'sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E', crossorigin: 'anonymous'},
+    ],
   },
 
   /*
@@ -44,13 +40,16 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    {src: '~/plugins/vue-easy-lightbox', ssr: false}
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-webfontloader',
+    'nuxt-fontawesome'
   ],
 
   /*
@@ -75,5 +74,13 @@ module.exports = {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
     CTF_PERSON_ID: config.CTF_PERSON_ID,
     CTF_BLOG_POST_TYPE_ID: config.CTF_BLOG_POST_TYPE_ID
-  }
+  },
+  webfontloader: {
+    google: {
+      families: [
+        'Abel',
+        'Noto+Sans+JP'
+      ]
+    }
+  },
 }
