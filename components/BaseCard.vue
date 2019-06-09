@@ -2,7 +2,7 @@
   <v-card class="card" flat>
     <v-img
       :src="image"
-      aspect-ratio="1.4"
+      aspect-ratio="1.8"
       class="card_image"
       cover
     >

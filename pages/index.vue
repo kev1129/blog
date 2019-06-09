@@ -4,15 +4,16 @@
         <v-container grid-list-xl>
             <v-layout  align-start justify-start row wrap>
                 <v-flex v-for="(story, index) in storys" :key="index" xs12 sm12 md6 lg6 xl6>
-                    <base-card :link="story.link" :image="story.image" :text="story.text"></base-card>
+                    <nuxt-link :to="{ name: 'tags-id', params: { id: story.id }}">
+                        <base-card :link="story.link" :image="story.image" :text="story.text"></base-card>
+                    </nuxt-link>
                 </v-flex>
             </v-layout>
         </v-container>
-        <!--  -->
         <base-title :title="portfolio"></base-title>
         <v-container grid-list-md>
             <v-layout align-start justify-start row wrap>
-                <v-flex v-for="(card, index) in cards" :key="index" md4 lg4>
+                <v-flex v-for="(card, index) in cards" :key="index" xs12 sm6 md4 lg4>
                     <base-portcard :link="card.link" :image="card.image" :text="card.text"></base-portcard>
                 </v-flex>
             </v-layout>
@@ -35,10 +36,8 @@ export default {
             portfolio: 'Portfolio',
             story: 'Story',
             storys: [
-                {'text': 'Permaculture', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
-                {'text': 'Machine Learning', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
-                {'text': 'Python', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
-                {'text': 'Science', 'param': 'aa', 'link': 'ss', 'image': 'img/story.jpg'},
+                {'text': 'Permaculture', 'image': 'img/story.jpg', 'id': 'permaculture'},
+                {'text': 'Machine Learning', 'image': 'img/story.jpg', 'id': 'machine-learning'},
             ],
             cards: [
                 {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku.jpg'},

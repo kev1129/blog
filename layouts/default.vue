@@ -4,9 +4,8 @@
       <v-container>
         <base-pagetitle class="page_title"></base-pagetitle>
         <base-nav></base-nav>
-        <base-sns></base-sns>
-        <nuxt />
       </v-container>
+        <nuxt />
     </v-content>
     <v-footer
       app

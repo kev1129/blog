@@ -11,7 +11,7 @@
                     <h2 class="en name">Kebukawa Shinado</h2>
                     <hr>
                     <span class="en text">Student. (2o)</span><br>
-                    <span class="en text">Major in Fermentation Science and Technology at Tokyo University of Agriculture</span>
+                    <span class="en text">I Major in Fermentation Science and Technology at Tokyo University of Agriculture</span>
                 </div>
                 <div class="about about_jp">
                     <h2 class="name">毛部川 風</h2>
@@ -19,6 +19,9 @@
                     <span class="text">大学生. 20歳</span><br>
                     <span class="text">東京農業大学 醸造科学科</span>
                 </div>
+                <span v-for="(item, index) in items" :key="index">
+                    <a :href="item.link" class="sns" target="_brank">{{item.name}}</a> / 
+                </span>
             </v-flex>
         </v-layout>
     </v-container>
@@ -45,6 +48,15 @@ export default {
         return {
             title: 'Profile',
             image: 'img/me.jpg',
+            items: [
+                {'name': 'Facebook', 'link' : 'https://www.facebook.com/profile.php?id=100009639289112'},
+                {'name': 'Instagram', 'link' : 'https://www.instagram.com/shinado1998/'},
+                {'name': 'Twitter', 'link' : 'https://twitter.com/shinadokebukawa'},
+                {'name': 'Note', 'link' : 'https://note.mu/kev'},
+                {'name': 'Linkedin', 'link' : 'https://www.linkedin.com/in/shinado-kebukawa-754951185/'},
+                {'name': 'Github', 'link' : 'https://github.com/kev1129'},
+                {'name': 'Qiita', 'link' : 'https://qiita.com/kev1129'},
+            ]
         }
     }
 }
@@ -86,5 +98,12 @@ export default {
 }
 .desc {
     font-size: 1.3rem;
+}
+.sns {
+    opacity: .9;
+    font-size: 1rem;
+    font-style: italic;
+    color: #000;
+    opacity: .6;
 }
 </style>
