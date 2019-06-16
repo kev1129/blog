@@ -6,7 +6,12 @@
       class="card_image"
       cover
     >
-      <a :href="link" class="card_text">{{text}}</a>
+      <v-layout align-end justify-start row fill-height wrap>
+        <v-flex xs12 sm12 md12 lg12 class="card_inner">
+          <span class="card_tag">{{tag}}</span>
+          <h3 class="card_title">{{title}}</h3>
+        </v-flex>
+      </v-layout>
     </v-img>
   </v-card>
 </template>
@@ -16,7 +21,8 @@ export default {
   props: {
     image: String,
     link: String,
-    text: String
+    tag: String,
+    title: String,
   },
 }
 </script>
@@ -24,23 +30,23 @@ export default {
 <style lang="scss" scoped>
 .card {
   font-family: "Abel";
-  position: relative;
-  text-align: center;
-  .card_text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    margin:0;
-    padding:0;
-    color: #fff;
-    font-size: 2rem;
-    letter-spacing: 0.08rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: .2s;
+  .card_inner {
+    margin-left: 5%;
+    margin-bottom: 3%;
+    .card_tag {
+      color: #fff;
+      font-style: italic;
+    }
+    .card_title {
+      color: #fff;
+      font-size: 2.2rem;
+      letter-spacing: 0.08rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: .2s;
+      font-style: italic;
+
+    }
   }
 }
 .card:hover {

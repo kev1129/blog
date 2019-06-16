@@ -13,8 +13,9 @@ export default {
     data () {
         return {
             items: [
+                {'name': 'Home', 'link': 'index'},
                 {'name': 'Profile', 'link': 'profile'},
-                {'name': 'Story', 'link': 'posts'},
+                {'name': 'Blog', 'link': 'posts'},
                 {'name': 'Gallery', 'link': 'gallery'},
                 {'name': 'Contact', 'link': 'contact'}
             ]
@@ -30,16 +31,17 @@ export default {
 .link {
     font-family: "Abel";
     font-style: italic;
-    font-weight: bold;
+    font-weight: normal;
     letter-spacing: 0.08rem;
     text-decoration: none;
     color: #000;
     font-size: 1.4rem;
     transition: .3s;
     margin-right: 20px;    
+    position: relative;
 }
 .link:hover {
     opacity: .6;
-    transition: .2s;
+    transform: .3s
 }
 </style>

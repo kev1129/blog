@@ -16,11 +16,11 @@
 .item {
     font-size: 1.8rem;
     font-style: italic;
-    font-weight: 100;
+    font-weight: thin;
     letter-spacing: 0.08rem;
     color: #fff;
     display: inline-block;
     background-color: black;
-    padding: 4px 10px;
+    padding: 10px 20px;
 }
 </style>

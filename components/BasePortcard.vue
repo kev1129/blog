@@ -7,7 +7,7 @@
       cover
     />
     <v-card-title class="card_text_box">
-      <a :href="link" class="card_text">{{text}}</a>
+      <a :href="link" class="card_text" target="_blank">{{text}}</a>
     </v-card-title>
   </v-card>
 </template>

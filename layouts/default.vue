@@ -2,8 +2,12 @@
   <v-app class="app">
     <v-content>
       <v-container>
-        <base-pagetitle class="page_title"></base-pagetitle>
-        <base-nav></base-nav>
+        <div class="title">
+          <base-pagetitle></base-pagetitle>
+        </div>
+        <div class="nav">
+          <base-nav></base-nav>
+        </div>
       </v-container>
         <nuxt />
     </v-content>
@@ -29,6 +33,13 @@ export default {
 </script>
 
 <style>
+.theme--light.application {
+    background: #fff;
+    color: rgba(0,0,0,1);
+}
+.app {
+  background-color: #fff;
+}
 html {
   font-family: 'Abel', 'Noto Sans JP', sans-serif;
   background: #fff;
@@ -36,7 +47,7 @@ html {
 body {
   background: #fff;
 }
-.page_title {
+.title {
   margin-bottom: 12px;
 }
 </style>

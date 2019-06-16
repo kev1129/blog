@@ -1,52 +1,31 @@
 <template>
 <div>
-    <base-title :title="title"></base-title>
     <v-container>
         <v-layout  align-start justify-start row wrap>
             <v-flex xs12 sm12 md6 lg6 xl6>
-                <v-form
-                ref="form"
-                v-model="valid"
-                lazy-validation
-                >
-                    <v-text-field
-                        v-model="name"
-                        :counter="20"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="email"
-                        label="Subject"
-                        required
-                    ></v-text-field>
-
-                    <v-textarea
-                    name="input-7-1"
-                    label="Content"
-                    value=""
-                    rows="10"
-                    ></v-textarea>
-                    <v-btn dark>submit</v-btn>
-                </v-form>
-
+                <div class="ifrm-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOpxBGo2_eycSSDEGSDjcJK4t96zezeJStI8ke9fztPaA_SQ/viewform?embedded=true" width="640" height="756" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます...</iframe>
+                </div>
             </v-flex>
         </v-layout>
     </v-container>
 </div>
 </template>
 <script>
-import BaseTitle from '~/components/BaseTitle.vue'
-export default {
-    components: {
-        BaseTitle,
-    },
-    data () {
-        return {
-            title: 'Contact Me'
-        }
-    }
-}
 </script>
+
+<style lang="scss" scoped>
+.ifrm-container {
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+}
+ 
+.ifrm-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    }
+</style>

@@ -1,17 +1,20 @@
 <template>
     <div>
-        <base-title :title="story"></base-title>
-        <v-container grid-list-xl>
+        <base-video class="video"></base-video>
+        <base-title :title="blog"></base-title>
+        <v-container class="section">
             <v-layout  align-start justify-start row wrap>
                 <v-flex v-for="(story, index) in storys" :key="index" xs12 sm12 md6 lg6 xl6>
-                    <nuxt-link :to="{ name: 'tags-id', params: { id: story.id }}">
-                        <base-card :link="story.link" :image="story.image" :text="story.text"></base-card>
+                    <!-- tag別の記事が増えてきたらパラメーターを追加する -->
+                    <!-- <nuxt-link :to="{ name: 'tags-id', params: { id: story.id }}" class="card_link"> -->
+                        <nuxt-link :to="{ name: 'tags-id'}" class="card_link">
+                        <base-card :link="story.link" :image="story.image" :title="story.title" :tag="story.tag"></base-card>
                     </nuxt-link>
                 </v-flex>
             </v-layout>
         </v-container>
         <base-title :title="portfolio"></base-title>
-        <v-container grid-list-md>
+        <v-container grid-list-md class="section">
             <v-layout align-start justify-start row wrap>
                 <v-flex v-for="(card, index) in cards" :key="index" xs12 sm6 md4 lg4>
                     <base-portcard :link="card.link" :image="card.image" :text="card.text"></base-portcard>
@@ -25,19 +28,21 @@
 import BaseTitle from '~/components/BaseTitle.vue'
 import BasePortcard from '~/components/BasePortcard.vue'
 import BaseCard from '~/components/BaseCard.vue'
+import BaseVideo from '~/components/BaseVideo.vue'
 export default {
     components: {
         BaseTitle,
         BaseCard,
-        BasePortcard
+        BasePortcard,
+        BaseVideo
     },
     data () {
         return {
             portfolio: 'Portfolio',
-            story: 'Story',
+            blog: 'Blog',
             storys: [
-                {'text': 'Permaculture', 'image': 'img/story.jpg', 'id': 'permaculture'},
-                {'text': 'Machine Learning', 'image': 'img/story.jpg', 'id': 'machine-learning'},
+                {'title': 'Permaculture', 'image': 'img/permaculture.jpg', 'id': 'permaculture','tag': 'Permaculture / Culture / Agriculture / Science / Nature / Life',},
+                {'title': 'Machine Learning', 'image': 'img/machine.jpg', 'id': 'machine-learning', 'tag': 'Machine Learning / Deep Learning / Data Science / Python / Programming'},
             ],
             cards: [
                 {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku.jpg'},
@@ -48,3 +53,15 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.card_link {
+    text-decoration: none;
+}
+.section {
+    margin-bottom: 48px;
+}
+.video {
+    margin-bottom: 54px;
+}
+</style>

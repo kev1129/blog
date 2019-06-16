@@ -8,9 +8,9 @@
             :key="index"
             class="pic"
             @click="() => show(index)"
-            xs12 sm6 md6 lg6
+            xs12 sm6 md6 lg4
           >
-            <img :src="src">
+            <img :src="src" aspect-ratio="1.5" contain>
           </v-flex>
         </v-layout>
       </v-container>
@@ -35,11 +35,18 @@ export default {
   data () {
     return {
       imgs: [
-        'https://i.loli.net/2018/11/10/5be6852cdb002.jpeg',
-        'https://i.loli.net/2018/11/10/5be6852ce6965.jpeg',
-        'https://i.loli.net/2018/11/10/5be6852dec46e.jpeg',
-        'https://i.loli.net/2018/11/10/5be6852e1366d.jpeg',
-        'https://i.loli.net/2018/11/10/5be6852e33f19.jpeg'
+        'gallery/16.jpg',
+        'gallery/2.jpg',
+        'gallery/3.jpg',
+        'gallery/4.jpg',
+        'gallery/5.jpg',
+        'gallery/7.jpg',
+        'gallery/8.jpg',
+        'gallery/11.jpg',
+        'gallery/9.jpg',
+        'gallery/10.jpg',
+        'gallery/13.jpg',
+        'gallery/14.jpg',
       ],
       visible: false,
       index: 0, // default

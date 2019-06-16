@@ -14,15 +14,16 @@ export default {
 
 <style lang="scss" scoped>
 .base_title {
+    display: inline-block;
     font-family: 'Abel';
     font-size: 1.6rem;
     font-style: italic;
-    font-weight: normal;
+    font-weight: 100;
     letter-spacing: 0.08rem;
     color: #000;
-    display: block;
     padding: 4px 10px;
-    padding: 0;
+    border-bottom: solid 1px #000;
+    padding-bottom: 0;
 }
 .container {
     padding-top: 0;
