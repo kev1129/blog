@@ -1,6 +1,6 @@
 <template>
     <div>
-        <base-video class="video"></base-video>
+        <!-- <base-video class="video"></base-video> -->
         <base-title :title="blog"></base-title>
         <v-container class="section">
             <v-layout  align-start justify-start row wrap>
@@ -41,13 +41,13 @@ export default {
             portfolio: 'Portfolio',
             blog: 'Blog',
             storys: [
-                {'title': 'Permaculture', 'image': 'img/permaculture.jpg', 'id': 'permaculture','tag': 'Permaculture / Culture / Agriculture / Science / Nature / Life',},
-                {'title': 'Machine Learning', 'image': 'img/machine.jpg', 'id': 'machine-learning', 'tag': 'Machine Learning / Deep Learning / Data Science / Python / Programming'},
+                {'title': 'Permaculture', 'image': 'img/permaculture-min.jpg', 'id': 'permaculture','tag': 'Permaculture / Culture / Agriculture / Science / Nature / Life',},
+                {'title': 'Machine Learning', 'image': 'img/machine-min.jpg', 'id': 'machine-learning', 'tag': 'Machine Learning / Deep Learning / Data Science / Python / Programming'},
             ],
             cards: [
-                {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku.jpg'},
-                {'text': 'Web Portfolio', 'link': 'https://shinadokebukawa.com/portfolio/', 'image': 'img/portfolio.jpg'},
-                {'text': 'WordPress Blog', 'link': 'https://shinadokebukawa.com/taiwan/', 'image': 'img/taiwan.jpg'},
+                {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku-min.jpg'},
+                {'text': 'Web Portfolio', 'link': 'https://shinadokebukawa.com/portfolio/', 'image': 'img/portfolio-min.jpg'},
+                {'text': 'WordPress Blog', 'link': 'https://shinadokebukawa.com/taiwan/', 'image': 'img/taiwan-min.jpg'},
             ]
         }
     },

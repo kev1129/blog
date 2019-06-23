@@ -47,7 +47,7 @@ export default {
     data () {
         return {
             title: 'Profile',
-            image: 'img/me.jpg',
+            image: 'img/me-min.jpg',
             items: [
                 {'name': 'Facebook', 'link' : 'https://www.facebook.com/profile.php?id=100009639289112'},
                 {'name': 'Instagram', 'link' : 'https://www.instagram.com/shinado1998/'},
