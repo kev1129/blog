@@ -10,11 +10,10 @@
             @click="() => show(index)"
             xs12 sm6 md6 lg4
           >
-            <img :src="src" aspect-ratio="1.5" contain>
+            <img v-lazy="src" aspect-ratio="1.5" contain>
           </v-flex>
         </v-layout>
       </v-container>
-      
       <!-- 各画像を拡大するときにのためのコンポーネント -->
       <vue-easy-lightbox
         :visible="visible"

@@ -11,11 +11,11 @@
       </v-container>
         <nuxt />
     </v-content>
-    <!-- <v-footer
-      app
-    >
-      <span>&copy; 2019</span>
-    </v-footer> -->
+    <v-footer color="white">
+      <v-layout justify-center height="auto">
+        <span>&copy; Shinado Kebukawa</span>
+      </v-layout>
+    </v-footer>
   </v-app>
 </template>
 
