@@ -19,6 +19,9 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <button v-on:click="increment()">Add 1</button>
+    {{this.$store.state.counter}}
+    {{getPosts}}
   </div>
 </template>
 
@@ -27,7 +30,11 @@ import BaseTitle from '~/components/BaseTitle.vue'
 import BaseTag from '~/components/BaseTag.vue'
 import BasePost from '~/components/BasePost.vue'
 import {createClient} from '~/plugins/contentful.js'
+import { mapGetters } from 'vuex'
+
 const client = createClient()
+const POSTS_PER_PAGE = 2
+
 export default {
   components: {
     BaseTitle,
@@ -44,7 +51,8 @@ export default {
     }
   },
   // `env` is available in the context object
-  asyncData ({env}) {
+  asyncData ({env, store}) {
+    console.log(store.state.counter)
     return Promise.all([
       // fetch the owner of the blog
       // client.getContentTypes(),
@@ -54,7 +62,9 @@ export default {
       // fetch all blog posts sorted by creation date
       client.getEntries({
         'content_type': env.CTF_BLOG_POST_TYPE_ID,
-        order: '-sys.createdAt'
+        order: '-sys.createdAt',
+        skip: (store.state.counter + 1) * POSTS_PER_PAGE,
+        limit: POSTS_PER_PAGE
       }),
       client.getEntries({
         content_type: 'blogTabs',
@@ -63,15 +73,20 @@ export default {
     ]).then(([entries, posts, blogTabs]) => {
       // return data that should be available
       // in the template
-        console.log(entries.items)
-        console.log(posts.items)
-        console.log(blogTabs.items)
       return {
         person: entries.items,
         posts: posts.items,
         blogTabs: blogTabs.items
       }
     }).catch(console.error)
+  },
+  // methods: {
+  //   increment () {
+  //     this.$store.commit('increment')
+  //   }
+  // },
+  computed: {
+    ...mapGetters(['getPosts']),
   }
 }
 </script>
