@@ -19,6 +19,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <base-more :handle-click-more="fetchMore"></base-more>
     <button v-on:click="increment()">Add 1</button>
     {{this.$store.state.counter}}
     {{getPosts}}
@@ -29,6 +30,7 @@
 import BaseTitle from '~/components/BaseTitle.vue'
 import BaseTag from '~/components/BaseTag.vue'
 import BasePost from '~/components/BasePost.vue'
+import BaseMore from '~/components/BaseMore.vue'
 import {createClient} from '~/plugins/contentful.js'
 import { mapGetters } from 'vuex'
 
@@ -39,7 +41,8 @@ export default {
   components: {
     BaseTitle,
     BaseTag,
-    BasePost
+    BasePost,
+    BaseMore
   },
   data () {
     return {
@@ -87,6 +90,11 @@ export default {
   // },
   computed: {
     ...mapGetters(['getPosts']),
+  },
+  methods: {
+    fetchMore() {
+      this.fetchPosts({ pageType: CONTENT_TYPE_POST, page: this.page + 1 })
+    }
   }
 }
 </script>
