@@ -91,11 +91,11 @@ export default {
   computed: {
     ...mapGetters(['getPosts']),
   },
-  methods: {
-    fetchMore() {
-      this.fetchPosts({ pageType: CONTENT_TYPE_POST, page: this.page + 1 })
-    }
-  }
+  // methods: {
+  //   fetchMore() {
+  //     this.fetchPosts({ pageType: CONTENT_TYPE_POST, page: this.page + 1 })
+  //   }
+  // }
 }
 </script>
 
