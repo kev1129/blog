@@ -11,7 +11,7 @@
     <base-title :title="title"></base-title>
     <v-container grid-list-lg class="section">
       <v-layout align-start justify-start row wrap>
-        <v-flex v-for="(post, index) in posts" :key="index" xs12 sm12 md6 lg6>
+        <v-flex v-for="(post, index) in getPosts[0]" :key="index" xs12 sm12 md6 lg6>
           <base-post :title="post.fields.title" :text="post.fields.description"
             :date="( new Date(post.fields.publishDate)).toDateString()"
             :slug="post.fields.slug"
@@ -19,10 +19,11 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <base-more :handle-click-more="fetchMore"></base-more>
-    <button v-on:click="increment()">Add 1</button>
-    {{this.$store.state.counter}}
-    {{getPosts}}
+    <button v-on:click="fetchMore()">Add 1</button>
+
+   <div v-for="(post, index) in getPosts" :key=index> 
+    {{ post }}
+    </div>
   </div>
 </template>
 
@@ -53,9 +54,17 @@ export default {
       ]
     }
   },
+  async fetch({ store, env }) {
+    const data = await client.getEntries({
+      'content_type': env.CTF_BLOG_POST_TYPE_ID,
+      order: '-sys.createdAt',
+      skip: (store.state.counter + 1) * POSTS_PER_PAGE,
+      limit: POSTS_PER_PAGE
+    })
+    store.commit("addPost", data.items)
+  },
   // `env` is available in the context object
   asyncData ({env, store}) {
-    console.log(store.state.counter)
     return Promise.all([
       // fetch the owner of the blog
       // client.getContentTypes(),
@@ -78,16 +87,26 @@ export default {
       // in the template
       return {
         person: entries.items,
-        posts: posts.items,
+        // posts: posts.items,
         blogTabs: blogTabs.items
       }
     }).catch(console.error)
   },
-  // methods: {
-  //   increment () {
-  //     this.$store.commit('increment')
-  //   }
-  // },
+ methods: {
+   increment () {
+     this.$store.commit('increment')
+   },
+   async fetchMore() {
+    const data = await client.getEntries({
+      'content_type': process.env.CTF_BLOG_POST_TYPE_ID,
+      order: '-sys.createdAt',
+      skip: (this.$store.state.counter + 1) * POSTS_PER_PAGE,
+      limit: POSTS_PER_PAGE
+    })
+    console.log(this.$store.state.counter)
+    this.$store.commit("mergePost", data.items)
+   }
+ },
   computed: {
     ...mapGetters(['getPosts']),
   },

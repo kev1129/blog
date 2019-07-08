@@ -11,6 +11,9 @@ export const mutations = {
   },
   addPost (state, post) {
     state.getPosts.push(post)
+  },
+  mergePost (state, post) {
+    state.getPosts.concat(post)
   }
 }
 
