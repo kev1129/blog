@@ -97,14 +97,14 @@ export default {
      this.$store.commit('increment')
    },
    async fetchMore() {
+    this.$store.commit("increment")
     const data = await client.getEntries({
       'content_type': process.env.CTF_BLOG_POST_TYPE_ID,
       order: '-sys.createdAt',
       skip: (this.$store.state.counter + 1) * POSTS_PER_PAGE,
       limit: POSTS_PER_PAGE
     })
-    console.log(this.$store.state.counter)
-    this.$store.commit("mergePost", data.items)
+    this.$store.commit("addPost", data.items)
    }
  },
   computed: {
