@@ -11,18 +11,15 @@
     <base-title :title="title"></base-title>
     <v-container grid-list-lg class="section">
       <v-layout align-start justify-start row wrap>
-        <v-flex v-for="(post, index) in posts" :key="index" xs12 sm12 md6 lg6>
-          <base-post :title="post.fields.title" :text="post.fields.description"
-            :date="( new Date(post.fields.publishDate)).toDateString()"
-            :slug="post.fields.slug"
+        <v-flex v-for="(post, index) in getPosts" :key="index" xs12 sm12 md6 lg6>
+          <base-post :title="post.title" :text="post.description"
+            :date="( new Date(post.publishDate)).toDateString()"
+            :slug="post.slug"
           ></base-post>
         </v-flex>
       </v-layout>
     </v-container>
-    <base-more :handle-click-more="fetchMore"></base-more>
-    <button v-on:click="increment()">Add 1</button>
-    {{this.$store.state.counter}}
-    {{getPosts}}
+    <button v-on:click="fetchMore()">もっと読む</button>
   </div>
 </template>
 
@@ -53,49 +50,57 @@ export default {
       ]
     }
   },
+  async fetch({ store, env }) {
+    const data = await client.getEntries({
+      'content_type': env.CTF_BLOG_POST_TYPE_ID,
+      order: '-sys.createdAt',
+      skip: (store.state.counter) * POSTS_PER_PAGE,
+      limit: POSTS_PER_PAGE
+    })
+    const posts = []
+    for(const i in data.items) {
+      posts.push(data.items[i].fields)
+    }
+    store.commit("addPost", posts)
+  },
   // `env` is available in the context object
   asyncData ({env, store}) {
-    console.log(store.state.counter)
     return Promise.all([
-      // fetch the owner of the blog
-      // client.getContentTypes(),
       client.getEntries({
         'sys.id': env.CTF_PERSON_ID
-      }),
-      // fetch all blog posts sorted by creation date
-      client.getEntries({
-        'content_type': env.CTF_BLOG_POST_TYPE_ID,
-        order: '-sys.createdAt',
-        skip: (store.state.counter + 1) * POSTS_PER_PAGE,
-        limit: POSTS_PER_PAGE
       }),
       client.getEntries({
         content_type: 'blogTabs',
         order: '-sys.createdAt'
       })
-    ]).then(([entries, posts, blogTabs]) => {
+    ]).then(([entries, blogTabs]) => {
       // return data that should be available
       // in the template
       return {
         person: entries.items,
-        posts: posts.items,
         blogTabs: blogTabs.items
       }
     }).catch(console.error)
   },
-  // methods: {
-  //   increment () {
-  //     this.$store.commit('increment')
-  //   }
-  // },
+ methods: {
+   async fetchMore() {
+    this.$store.commit("increment")
+    const data = await client.getEntries({
+      'content_type': process.env.CTF_BLOG_POST_TYPE_ID,
+      order: '-sys.createdAt',
+      skip: this.$store.state.counter * POSTS_PER_PAGE,
+      limit: POSTS_PER_PAGE
+    })
+    const posts = []
+    for(const i in data.items) {
+      posts.push(data.items[i].fields)
+    }
+    this.$store.commit("addPost", posts)
+   }
+ },
   computed: {
     ...mapGetters(['getPosts']),
   },
-  // methods: {
-  //   fetchMore() {
-  //     this.fetchPosts({ pageType: CONTENT_TYPE_POST, page: this.page + 1 })
-  //   }
-  // }
 }
 </script>
 

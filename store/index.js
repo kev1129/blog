@@ -1,6 +1,6 @@
 export const state = () => ({
   counter: 0,
-  getPosts: [],
+  posts: [],
   page: null,
 })
 
@@ -10,21 +10,24 @@ export const mutations = {
     state.counter++
   },
   addPost (state, post) {
-    state.getPosts.push(post)
-  }
+    state.posts = state.posts.concat(post)
+  },
 }
 
 // コンポーネントから値を受け取ってmutationsにわたす
 export const actions = {
   updateMember (context, member) {
       context.commit('updateMember', member)
+  },
+  fetchPost() {
+    context.commit('increment')
   }
 }
 
 // stateを取得する
 export const getters = {
     getPosts(state) {
-      return state.getPosts
+      return state.posts
     },
 }
 
