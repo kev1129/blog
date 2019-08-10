@@ -4,7 +4,7 @@
         <base-title :title="blog"></base-title>
         <v-container class="section">
             <v-layout  align-start justify-start row wrap>
-                <v-flex v-for="(story, index) in storys" :key="index" xs12 sm12 md6 lg6 xl6>
+                <v-flex v-for="(story, index) in storys" :key="index" xs12 sm12 md12 lg12 xl12>
                     <!-- tag別の記事が増えてきたらパラメーターを追加する -->
                     <!-- <nuxt-link :to="{ name: 'tags-id', params: { id: story.id }}" class="card_link"> -->
                         <nuxt-link :to="{ name: 'tags-id'}" class="card_link">
@@ -41,8 +41,7 @@ export default {
             portfolio: 'Portfolio',
             blog: 'Blog',
             storys: [
-                {'title': 'Permaculture', 'image': 'img/permaculture-min.jpg', 'id': 'permaculture','tag': 'Permaculture / Culture / Agriculture / Science / Nature / Life',},
-                {'title': 'Machine Learning', 'image': 'img/machine-min.jpg', 'id': 'machine-learning', 'tag': 'Machine Learning / Deep Learning / Data Science / Python / Programming'},
+                {'title': 'Blog', 'image': 'img/blog.jpg', 'id': 'blog','tag': 'I will say this in advance almost all of articles don\'t make sence.',},
             ],
             cards: [
                 {'text': 'HP パン工房プクムク', 'link': 'https://pankouboupukumuku.netlify.com/', 'image': 'img/pukumuku-min.jpg'},
